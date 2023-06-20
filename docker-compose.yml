@@ -1,5 +1,4 @@
 version: "3"
-
 services:
   admin:
     build: .
@@ -13,4 +12,6 @@ services:
     volumes:
       - .:/app
 
-
+networks:
+  tavrida:
+    external: true

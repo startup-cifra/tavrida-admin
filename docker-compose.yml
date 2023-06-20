@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  admin:
+    build: .
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - tavrida
+    volumes:
+      - .:/app
+
+

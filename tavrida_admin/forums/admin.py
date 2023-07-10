@@ -26,7 +26,6 @@ class ModelAdminView(admin.ModelAdmin):
     fields = (
         "logo_url",
         "value_url",
-        "code",
         "forum",
         "title",
     )

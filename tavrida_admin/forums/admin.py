@@ -20,7 +20,7 @@ class ModelAdminView(admin.ModelAdmin):
         "id",
         "logo_url",
         "value_url",
-        "created_at",
+        "started_at",
         "deleted_at",
         "count_views",
         "count_likes",

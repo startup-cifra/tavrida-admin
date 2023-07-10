@@ -1,11 +1,12 @@
+import random
 import uuid
 from django.db import models
-
+from datetime import datetime
 
 class Forum(models.Model):
     id = models.UUIDField(primary_key=True, db_column="Id", default=uuid.uuid4)
     logo_url = models.CharField(max_length=2048, db_column="LogoUrl", verbose_name="Ссылка на логотип")
-    image_urls = models.TextField(null=True, blank=True, db_column="ImageUrls", verbose_name="Ссылки на изображения")
+    image_urls = models.ImageField(null=True, blank=True, db_column="ImageUrls", verbose_name="Изображение")
     title = models.CharField(max_length=256, db_column="Title", verbose_name="Название")
     description = models.CharField(max_length=1024, db_column="Description", verbose_name="Описание")
     started_at = models.DateTimeField(db_column="StartedAt", verbose_name="Время начала")
@@ -25,15 +26,16 @@ class Forum(models.Model):
 
 class Model(models.Model):
     id = models.UUIDField(primary_key=True, db_column="Id", default=uuid.uuid4)
-    logo_url = models.CharField(max_length=2048, db_column="LogoUrl", verbose_name="Ссылка на логотип")
-    value_url = models.CharField(max_length=2048, db_column="ValueUrl", verbose_name="Ссылка на модель")
-    started_at = models.DateTimeField(db_column="CreatedAt", verbose_name="Время начала")
-    updated_at = models.DateTimeField(null=True, blank=True, db_column="UpdatedAt", verbose_name="Время окончания")
+    logo_url = models.ImageField(max_length=2048, db_column="LogoUrl", verbose_name="Изображение", upload_to='http://193.124.118.62/api/1.0/data/image/')
+    title = models.CharField(max_length=256, db_column="Title", verbose_name="Название")
+    value_url = models.ImageField(db_column="ValueUrl", verbose_name="Модель", upload_to='http://193.124.118.62/api/1.0/data/image/')
+    updated_at = models.DateTimeField(default=datetime.now, blank=True, db_column="UpdatedAt", verbose_name="Время окончания")
     deleted_at = models.DateTimeField(null=True, blank=True, db_column="DeletedAt", verbose_name="Время удаления")
-    count_views = models.IntegerField(db_column="CountViews", verbose_name="Количество просмотров")
-    count_likes = models.IntegerField(db_column="CountLikes", verbose_name="Количество лайков")
-    code = models.CharField(max_length=4, db_column="Code", verbose_name="Уникальный код", unique=True)
+    count_views = models.IntegerField(db_column="CountViews", default=0, verbose_name="Количество просмотров")
+    count_likes = models.IntegerField(db_column="CountLikes", default=0, verbose_name="Количество лайков")
+    code = models.CharField(max_length=4, db_column="Code", verbose_name="Уникальный код", default=random.randint(1000, 9999), unique=True)
     forum = models.ForeignKey("Forum", on_delete=models.CASCADE, db_column="ForumId")
+    created_at = models.DateTimeField(default=datetime.now, blank=True, db_column="CreatedAt", verbose_name="Время удаления")
     # user_id = models.ForeignKey()
 
     class Meta:

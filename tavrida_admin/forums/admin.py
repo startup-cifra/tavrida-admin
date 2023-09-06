@@ -3,7 +3,7 @@ from django.utils.html import format_html
 
 from .models import Forum, Model
 
-UPLOAD_URL = 'http://185.233.187.109:8000/uploads'
+UPLOAD_URL = 'http://185.233.187.109:8000/'
 
 
 @admin.register(Forum)

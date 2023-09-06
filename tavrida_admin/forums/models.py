@@ -26,9 +26,9 @@ class Forum(models.Model):
 
 class Model(models.Model):
     id = models.UUIDField(primary_key=True, db_column="Id", default=uuid.uuid4)
-    logo_url = models.ImageField(max_length=2048, db_column="LogoUrl", verbose_name="Изображение", upload_to='storage')
+    logo_url = models.ImageField(max_length=2048, db_column="LogoUrl", verbose_name="Изображение", upload_to='http://185.233.187.109/uploads')
     title = models.CharField(max_length=256, db_column="Title", verbose_name="Название")
-    value_url = models.FileField(db_column="ValueUrl", verbose_name="Модель", upload_to='storage')
+    value_url = models.FileField(db_column="ValueUrl", verbose_name="Модель", upload_to='http://185.233.187.109/uploads')
     updated_at = models.DateTimeField(default=datetime.now, blank=True, db_column="UpdatedAt", verbose_name="Время окончания")
     deleted_at = models.DateTimeField(null=True, blank=True, db_column="DeletedAt", verbose_name="Время удаления")
     count_views = models.IntegerField(db_column="CountViews", default=0, verbose_name="Количество просмотров")

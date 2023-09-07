@@ -14,7 +14,12 @@ class ForumAdminView(admin.ModelAdmin):
     
     def save_model(self, request, obj: Model, form, change):
         super().save_model(request, obj, form, change)
-        obj.logo_url = UPLOAD_URL + obj.logo_url.url
+        if obj.logo_url.url.startswith(UPLOAD_URL):
+            obj.logo_url = UPLOAD_URL + obj.logo_url.url
+
+        if obj.value_url.url.startswith(UPLOAD_URL):
+            obj.value_url = UPLOAD_URL + obj.value_url.url
+
         obj.save()
 
     def image_tag(self, obj: Forum):
@@ -39,7 +44,12 @@ class ModelAdminView(admin.ModelAdmin):
 
     def save_model(self, request, obj: Model, form, change):
         super().save_model(request, obj, form, change)
-        obj.logo_url = UPLOAD_URL + obj.logo_url.url
+        if obj.logo_url.url.startswith(UPLOAD_URL):
+            obj.logo_url = UPLOAD_URL + obj.logo_url.url
+
+        if obj.value_url.url.startswith(UPLOAD_URL):
+            obj.value_url = UPLOAD_URL + obj.value_url.url
+
         obj.save()
 
     def image_tag(self, obj: Model):

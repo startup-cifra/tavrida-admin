@@ -10,15 +10,12 @@ UPLOAD_URL = 'http://185.233.187.109:8000/'
 class ForumAdminView(admin.ModelAdmin):
     list_display = ("image_tag", "title", "started_at")
     readonly_fields = ("deleted_at",)
-    fields = ("title", "description", "started_at", "ended_at", "image_urls", "map_urls")
-    
-    def save_model(self, request, obj: Model, form, change):
-        super().save_model(request, obj, form, change)
-        if obj.logo_url.url.startswith(UPLOAD_URL):
-            obj.logo_url = UPLOAD_URL + obj.logo_url.url
+    fields = ("title", "description", "started_at", "ended_at", "map_urls", "logo_url", "image_urls")
 
-        if obj.value_url.url.startswith(UPLOAD_URL):
-            obj.value_url = UPLOAD_URL + obj.value_url.url
+    def save_model(self, request, obj: Forum, form, change):
+        super().save_model(request, obj, form, change)
+        if not obj.logo_url.url.startswith(UPLOAD_URL):
+            obj.logo_url = UPLOAD_URL + obj.logo_url.url.removeprefix('/')
 
         obj.save()
 
@@ -28,7 +25,7 @@ class ForumAdminView(admin.ModelAdmin):
 
 @admin.register(Model)
 class ModelAdminView(admin.ModelAdmin):
-    list_display = ("image_tag", "title", "forum", "created_at")
+    list_display = ("image_tag", "title", "forum", "created_at", "code")
     readonly_fields = (
         "created_at",
         "deleted_at",
@@ -40,15 +37,16 @@ class ModelAdminView(admin.ModelAdmin):
         "value_url",
         "forum",
         "title",
+        "code",
     )
 
     def save_model(self, request, obj: Model, form, change):
         super().save_model(request, obj, form, change)
-        if obj.logo_url.url.startswith(UPLOAD_URL):
-            obj.logo_url = UPLOAD_URL + obj.logo_url.url
+        if not obj.logo_url.url.startswith(UPLOAD_URL):
+            obj.logo_url = UPLOAD_URL + obj.logo_url.url.removeprefix('/')
 
-        if obj.value_url.url.startswith(UPLOAD_URL):
-            obj.value_url = UPLOAD_URL + obj.value_url.url
+        if not obj.value_url.url.startswith(UPLOAD_URL):
+            obj.value_url = UPLOAD_URL + obj.value_url.url.removeprefix('/')
 
         obj.save()
 

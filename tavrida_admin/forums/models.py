@@ -5,6 +5,10 @@ from datetime import datetime
 from django.contrib.postgres.fields import ArrayField
 
 
+def random_code():
+    return random.randint(1000, 9999)
+
+
 class Forum(models.Model):
     id = models.UUIDField(primary_key=True, db_column="Id", default=uuid.uuid4)
     logo_url = models.ImageField(max_length=2048, db_column="LogoUrl", verbose_name="Ссылка на логотип")
@@ -42,7 +46,7 @@ class Model(models.Model):
     count_views = models.IntegerField(db_column="CountViews", default=0, verbose_name="Количество просмотров")
     count_likes = models.IntegerField(db_column="CountLikes", default=0, verbose_name="Количество лайков")
     code = models.CharField(
-        max_length=4, db_column="Code", verbose_name="Уникальный код", default=random.randint(1000, 9999), unique=True
+        max_length=4, db_column="Code", verbose_name="Уникальный код", default=random_code, unique=True
     )
     forum = models.ForeignKey("Forum", on_delete=models.CASCADE, db_column="ForumId")
     created_at = models.DateTimeField(

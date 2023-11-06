@@ -25,7 +25,7 @@ class ForumAdminView(admin.ModelAdmin):
 
 @admin.register(Model)
 class ModelAdminView(admin.ModelAdmin):
-    list_display = ("image_tag", "title", "forum", "created_at", "code")
+    list_display = ("image_tag", "title", "forum", "created_at", "code", "qr_code")
     readonly_fields = (
         "created_at",
         "deleted_at",
@@ -49,6 +49,11 @@ class ModelAdminView(admin.ModelAdmin):
             obj.value_url = UPLOAD_URL + obj.value_url.url.removeprefix('/')
 
         obj.save()
+
+    def qr_code(self, obj: Model):
+        return format_html(
+            f'<img id="barcode" src="https://api.qrserver.com/v1/create-qr-code/?data={obj.code}" alt="" title="{obj.code}" width="150" height="150"/>'
+        )
 
     def image_tag(self, obj: Model):
         return format_html(f'<img src="{obj.logo_url}" style="max-width:200px; max-height:200px"/>')

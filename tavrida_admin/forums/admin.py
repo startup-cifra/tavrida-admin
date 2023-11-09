@@ -52,7 +52,7 @@ class ModelAdminView(admin.ModelAdmin):
 
     def qr_code(self, obj: Model):
         return format_html(
-            f'<img id="barcode" src="https://api.qrserver.com/v1/create-qr-code/?data={obj.code}" alt="" title="{obj.code}" width="150" height="150"/>'
+            f'<img id="barcode" src="https://api.qrserver.com/v1/create-qr-code/?data={obj.id}" alt="" title="{obj.code}" width="150" height="150"/>'
         )
 
     def image_tag(self, obj: Model):

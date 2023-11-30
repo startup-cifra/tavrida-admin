@@ -38,6 +38,7 @@ class ModelAdminView(admin.ModelAdmin):
         "forum",
         "title",
         "code",
+        "description"
     )
 
     def save_model(self, request, obj: Model, form, change):

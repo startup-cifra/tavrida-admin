@@ -38,7 +38,7 @@ class Model(models.Model):
     id = models.UUIDField(primary_key=True, db_column="Id", default=uuid.uuid4)
     logo_url = models.ImageField(max_length=2048, db_column="LogoUrl", verbose_name="Изображение")
     title = models.CharField(max_length=256, db_column="Title", verbose_name="Название")
-    description = models.CharField(max_length=512, db_column="Description", verbose_name="Название")
+    description = models.TextField(max_length=512, db_column="Description", verbose_name="Описание")
     value_url = models.FileField(db_column="ValueUrl", verbose_name="Модель")
     updated_at = models.DateTimeField(
         default=datetime.now, blank=True, db_column="UpdatedAt", verbose_name="Время окончания"

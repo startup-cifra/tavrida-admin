@@ -186,8 +186,8 @@ CORS_ALLOW_HEADERS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.sparklingtide.dev",
-    "http://*.sparklingtide.dev",
+    "http://ili-art.space",
+    "https://ili-art.space",
     "https://*.127.0.0.1",
     "http://*.127.0.0.1",
 ]

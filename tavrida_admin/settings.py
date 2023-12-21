@@ -128,8 +128,8 @@ MIDDLEWARE = [
 
 # STATIC
 # ------------------------------------------------------------------------------
-STATIC_ROOT = str(BASE_DIR / "static")
-STATIC_URL = "/static/"
+STATIC_ROOT = str(BASE_DIR / "admin" / "static")
+STATIC_URL = "/admin/static/"
 STATICFILES_DIRS = []
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

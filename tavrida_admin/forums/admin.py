@@ -25,7 +25,7 @@ class ForumAdminView(admin.ModelAdmin):
 
 @admin.register(Model)
 class ModelAdminView(admin.ModelAdmin):
-    list_display = ("image_tag", "title", "forum", "created_at", "code", "qr_code")
+    list_display = ("image_tag", "title", "forum", "created_at", "code", "id", "qr_code")
     readonly_fields = (
         "created_at",
         "deleted_at",
